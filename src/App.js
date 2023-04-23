@@ -13,6 +13,18 @@ const App = () => {
       amount: 190,
       date: new Date(2023, 3, 12),
     },
+    {
+      id: 5,
+      title: "Vacation",
+      amount: 1000,
+      date: new Date(2022, 10, 15),
+    },
+    {
+      id: 5,
+      title: "Ipad",
+      amount: 500,
+      date: new Date(2021, 9, 7),
+    },
   ];
 
   const [expenses, setExpenses] = useState(initialState);

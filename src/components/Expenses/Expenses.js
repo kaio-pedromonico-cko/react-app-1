@@ -6,20 +6,14 @@ import "./Expenses.css";
 import { useState } from "react";
 
 const Expenses = (props) => {
-  const initialState = props.items.sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
-  );
-  const [expenses, setExpenses] = useState(initialState);
+  const [year, setYear] = useState("");
 
-  const onFilterChanged = (year) => {
-    const filteredExpenses = props.items.filter(
-      (item) => item.date.getFullYear() == year
-    );
-    setExpenses(filteredExpenses);
+  const onFilterChanged = (newYear) => {
+    setYear(newYear);
   };
 
   const onFilterClear = () => {
-    setExpenses(props.items);
+    setYear("");
   };
 
   return (
@@ -31,15 +25,20 @@ const Expenses = (props) => {
         />
       </Card>
       <Card className="expenses">
-        {expenses.map((item, idx) => (
-          <div key={idx}>
-            <ExpenseItem
-              title={item.title}
-              amount={item.amount}
-              date={item.date}
-            />
-          </div>
-        ))}
+        {props.items
+          .filter((item) =>
+            year != "" ? item.date.getFullYear() == year : item
+          )
+          .sort((a, b) => a.date.getTime() - b.date.getTime())
+          .map((item, idx) => (
+            <div key={idx}>
+              <ExpenseItem
+                title={item.title}
+                amount={item.amount}
+                date={item.date}
+              />
+            </div>
+          ))}
       </Card>
     </div>
   );

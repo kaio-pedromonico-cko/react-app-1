@@ -18,16 +18,15 @@ const Expenses = (props) => {
 
   return (
     <div>
-      <Card>
+      <Card className="expenses">
         <ExpenseFilter
+          selected={year}
           onFilterChanged={onFilterChanged}
           onFilterClear={onFilterClear}
         />
-      </Card>
-      <Card className="expenses">
         {props.items
           .filter((item) =>
-            year != "" ? item.date.getFullYear() == year : item
+            year !== "" ? item.date.getFullYear() === parseInt(year) : item
           )
           .sort((a, b) => a.date.getTime() - b.date.getTime())
           .map((item, idx) => (
